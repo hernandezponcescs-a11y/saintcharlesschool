@@ -84,6 +84,8 @@ export const pillars = {
   subtitle:
     "En Saint Charles' School combinamos idiomas, aprendizaje, creatividad y formación integral para acompañar a tus hijos en cada etapa de su educación.",
   cta: { label: "¡Contactanos!", href: WHATSAPP_URL },
+  // Botón debajo de las tarjetas: abre el mismo mapa que la dirección del footer (contact.mapsHref)
+  location: { label: "¡Estamos en una ubicación céntrica!", detail: "Col. Humuya, Tegucigalpa" },
   items: [
     {
       title: "Educación bilingüe desde pequeños",

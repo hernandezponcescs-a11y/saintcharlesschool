@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { pillars, SECTIONS } from "../data/content";
+import { ArrowRight, MapPin } from "lucide-react";
+import { contact, pillars, SECTIONS } from "../data/content";
 import SectionHeading from "./SectionHeading.jsx";
 import ContactButton from "./ContactButton.jsx";
-import { spring } from "../lib/motion";
+import { reveal, spring } from "../lib/motion";
 
 /** Tarjeta flotante con foto: entra con resorte y se eleva al pasar el cursor */
 function PillarCard({ number, title, text, image, alt, index }) {
@@ -37,6 +38,35 @@ function PillarCard({ number, title, text, image, alt, index }) {
   );
 }
 
+/** Botón rojo "¡Estamos en una ubicación céntrica!" → abre Google Maps (mismo enlace que el footer) */
+function LocationButton({ label, detail, href }) {
+  return (
+    <motion.div {...reveal(0.1)} className="mt-10 flex justify-center">
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover="hover"
+        whileTap={{ scale: 0.97 }}
+        variants={{ hover: { y: -2, scale: 1.02 } }}
+        transition={spring.snappy}
+        className="group inline-flex w-full max-w-[440px] items-center gap-4 rounded-2xl bg-crest-red px-5 py-4 text-left text-white shadow-[0_14px_32px_-14px_rgba(233,30,13,0.75)] transition-shadow duration-300 hover:shadow-[0_20px_40px_-14px_rgba(233,30,13,0.85)] sm:w-auto sm:max-w-none sm:px-6"
+      >
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15">
+          <MapPin aria-hidden="true" className="h-[22px] w-[22px]" strokeWidth={2} />
+        </span>
+        <span className="flex min-w-0 flex-1 flex-col">
+          <span className="text-[16px] font-semibold leading-[21px] tracking-[-0.01em] sm:text-[18px] sm:leading-[23px]">{label}</span>
+          <span className="mt-0.5 text-[12.5px] leading-[17px] text-white/80">{detail}</span>
+        </span>
+        <motion.span variants={{ hover: { x: 4 } }} transition={spring.bouncy} className="inline-flex shrink-0">
+          <ArrowRight aria-hidden="true" className="h-[22px] w-[22px]" strokeWidth={2} />
+        </motion.span>
+      </motion.a>
+    </motion.div>
+  );
+}
+
 export default function Pillars() {
   return (
     <section id={SECTIONS.pilares} className="bg-white">
@@ -60,6 +90,8 @@ export default function Pillars() {
             <PillarCard key={item.title} index={i} number={String(i + 1).padStart(2, "0")} {...item} />
           ))}
         </div>
+
+        <LocationButton {...pillars.location} href={contact.mapsHref} />
       </div>
     </section>
   );
