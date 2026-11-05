@@ -22,7 +22,7 @@ El proyecto ya trae el archivo `.github/workflows/deploy.yml`, que publica el si
 1. Sube el proyecto a un repositorio de GitHub (rama `main`).
 2. En el repositorio, ve a **Settings → Pages** y en **Source** elige **GitHub Actions**.
 3. Ve a la pestaña **Actions** y espera a que "Publicar sitio" termine (1–2 minutos).
-4. El sitio queda en `https://TU-USUARIO.github.io/NOMBRE-DEL-REPO/`.
+4. El sitio queda en `https://saintcharlesschool.github.io/`.
 
 Después, cada cambio que subas (por ejemplo, editar `src/data/content.js` desde la web de GitHub) vuelve a publicar el sitio automáticamente.
 
