@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { @apply bg-white font-sans text-ink; }
+  :focus-visible { outline: 2px solid #130f22; outline-offset: 3px; }
+  .on-dark :focus-visible { outline-color: #ffffff; }
+}
+
+@layer components {
+  /* Texto con el degradado rojo → naranja del diseño */
+  .text-flame {
+    background-image: linear-gradient(90deg, theme("colors.flame.from"), theme("colors.flame.to"));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-flame { background-image: linear-gradient(90deg, theme("colors.flame.from"), theme("colors.flame.to")); }
+
+  /* ---------- Galería: posiciones de cada foto ----------
+     En celular: 2 columnas simples. Desde tablet: el mosaico del diseño. */
+  .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 170px; grid-auto-flow: dense; gap: 8px; }
+  @media (min-width: 768px) {
+    .gallery-grid { grid-auto-flow: row; }
+    .gallery-grid > * { grid-area: var(--area); }
+    .gallery-a {
+      grid-template-columns: 492fr 202fr 218fr;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: unset;
+      height: clamp(260px, 33vw, 335px);
+      grid-template-areas:
+        "futbol museo manual"
+        "futbol foto  manual";
+    }
+    .gallery-b {
+      grid-template-columns: 232fr 190fr 190fr 291fr;
+      grid-template-rows: repeat(12, minmax(0, 1fr));
+      grid-auto-rows: unset;
+      height: clamp(300px, 37vw, 373px);
+      grid-template-areas:
+        "lectura danza   danza   feria"
+        "lectura danza   danza   feria"
+        "lectura danza   danza   feria"
+        "lectura danza   danza   feria"
+        "lectura danza   danza   feria"
+        "lectura danza   danza   feria"
+        "lectura danza   danza   aniv"
+        "lectura grad    podcast aniv"
+        "lectura grad    podcast aniv"
+        "lectura grad    podcast aniv"
+        "lectura grad    podcast aniv"
+        "lectura grad    podcast aniv";
+    }
+  }
+  @media (max-width: 767px) {
+    .gallery-grid > .tall { grid-row: span 2; }
+    .gallery-grid > .wide { grid-column: span 2; }
+  }
+}
